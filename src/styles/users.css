@@ -1,0 +1,113 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.205);
+}
+th {
+  font-weight: bold;
+  font-size: clamp(1.1rem, 1.3vw, 1.5rem);
+  text-align: left;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+th {
+  padding: 0.5em 1em;
+}
+td {
+  padding: 0.7em;
+}
+thead th {
+  background-color: white;
+  border-bottom: 2px solid var(--clr-accent);
+}
+tbody tr {
+  background-color: white;
+  transition: all 0.1s ease-in;
+}
+
+tbody tr:hover {
+  background-color: var(--clr-accent);
+  color: white;
+}
+.user-name-contaner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user-image {
+  --size: 35px;
+  background-color: blue;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+}
+.btns-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btns-container button {
+  border: none;
+  padding: 0.5em;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+}
+.btns-container button:first-child {
+  background-color: rgb(221, 221, 9);
+}
+.btns-container button:last-child {
+  background-color: rgb(211, 16, 16);
+  color: white;
+}
+
+.loading-container {
+  display: grid;
+  place-items: center;
+  min-height: 200px;
+}
+
+.overlay {
+  position: absolute;
+  content: "";
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.493);
+  z-index: 99;
+  display: grid;
+  place-items: center;
+}
+.confirm-delete-container {
+  background-color: white;
+  padding: 1em;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  gap: 2em;
+}
+.confirm-delete-container div {
+  display: flex;
+  gap: 1em;
+}
+.confirm-delete-container button {
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  font-size: 1.1rem;
+}
+.confirm-delete-container button:first-child {
+  background-color: red;
+  color: white;
+}
+.confirm-delete-container button:last-child {
+  background-color: green;
+  color: white;
+}

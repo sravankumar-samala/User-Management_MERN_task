@@ -1,0 +1,43 @@
+form {
+  width: min(100%, 500px);
+  margin: 0 auto;
+  background-color: white;
+  padding: 2em 1em;
+  display: grid;
+  gap: 1.5em;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.199);
+}
+h2 {
+  text-align: center;
+  font-size: clamp(1.3rem, 1.7vw, 2rem);
+}
+.inputs-devider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+label {
+  font-weight: bold;
+  font-size: clamp(1.1rem, 1.3vw, 1.5rem);
+}
+input,
+textarea {
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.add-user-btn {
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  background-color: var(--clr-accent);
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.error {
+  color: red;
+  font-size: clamp(0.9rem, 1.1vw, 1.2vw);
+}
