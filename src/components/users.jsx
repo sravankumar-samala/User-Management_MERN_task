@@ -87,7 +87,14 @@ export default function Users() {
           <tbody>
             {users &&
               users?.map((user) => (
-                <tr key={user._id}>
+                <tr
+                  key={user._id}
+                  onClick={() =>
+                    navigate(`/userDetails/${user._id}`, {
+                      state: { currentPage },
+                    })
+                  }
+                >
                   <td className="user-name-contaner">
                     <span
                       className="user-image"

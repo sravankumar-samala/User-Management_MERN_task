@@ -22,6 +22,7 @@ td {
 tbody tr {
   background-color: white;
   transition: all 0.1s ease-in;
+  cursor: pointer;
 }
 
 tbody tr:hover {
