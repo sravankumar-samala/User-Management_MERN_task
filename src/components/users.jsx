@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Pencil, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import Pagination from "./pagination";
 import chooseRandomColor from "./getRandomFile";
@@ -17,8 +17,8 @@ export default function Users() {
     location.state?.currentPage || 1
   );
   const [totalPages, setTotalPages] = useState(1);
-  const isScreenAbove620 = useMediaQuery({ query: "(min-width: 620px)" });
-  const isScreenAbove580 = useMediaQuery({ query: "(min-width: 580px)" });
+  const isScreenAbove680 = useMediaQuery({ query: "(min-width: 680px)" });
+  const isScreenAbove460 = useMediaQuery({ query: "(min-width: 460px)" });
   const navigate = useNavigate();
 
   const goToAddNewUser = () => {
@@ -79,8 +79,8 @@ export default function Users() {
           <thead>
             <tr>
               <th>Name</th>
-              {isScreenAbove580 && <th>Email</th>}
-              {isScreenAbove620 && <th>contact</th>}
+              {isScreenAbove680 && <th>Email</th>}
+              {isScreenAbove460 && <th>date of birth</th>}
               <th></th>
             </tr>
           </thead>
@@ -106,25 +106,27 @@ export default function Users() {
                     </span>
                     <span className="user-name">
                       <span>{user.name}</span>
-                      {!isScreenAbove580 && <i>{user.email}</i>}
+                      {!isScreenAbove680 && <i>{user.email}</i>}
                     </span>
                   </td>
-                  {isScreenAbove580 && <td>{user.email}</td>}
-                  {isScreenAbove620 && <td>{user.contact}</td>}
-                  <td className="btns-container">
-                    <button
+                  {isScreenAbove680 && <td>{user.email}</td>}
+                  {isScreenAbove460 && <td>{user.dateOfBirth}</td>}
+                  <td className="btn-container">
+                    {/* <button
                       type="button"
-                      onClick={() =>
+                      onClick={(e) => {
+                        e.stopPropagation();
                         navigate(`/updateUser/${user._id}`, {
                           state: { currentPage },
-                        })
-                      }
+                        });
+                      }}
                     >
                       <Pencil size={16} />
-                    </button>
+                    </button> */}
                     <button
                       type="button"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setShowConfirmBox(true);
                         setUserId(user._id);
                       }}

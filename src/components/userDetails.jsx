@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import LoadingView from "./LoadingView";
+import "../styles/userDetails.css";
 
 export default function UserDetails() {
   const [userDetails, setUserDetails] = useState(null);
@@ -40,7 +41,18 @@ export default function UserDetails() {
         </button>
       </header>
       {isUserPending && <LoadingView />}
-      {userDetails && <h2>{userDetails.name}</h2>}
+      {userDetails && (
+        <>
+          <h2>{userDetails.name}</h2>
+          <button
+            type="button"
+            className="update-btn"
+            onClick={() => navigate(`/updateUser/${userDetails._id}`)}
+          >
+            Update
+          </button>
+        </>
+      )}
     </>
   );
 }

@@ -6,7 +6,7 @@ table {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.205);
 }
 th {
-  padding: 0.5em 1em;
+  padding: 0.5em;
   color: var(--clr-primary);
   background-color: var(--clr-accent);
   font-weight: bold;
@@ -49,45 +49,40 @@ tbody tr:hover {
   font-size: 1.1rem;
 }
 .user-name i {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: gray;
 }
-.btns-container {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+.btn-container {
+  text-align: right;
 }
-
-.btns-container button {
+.btn-container button {
   border: none;
   padding: 0.5em;
   border-radius: 5px;
   display: grid;
   place-items: center;
 }
-.btns-container button:first-child {
+/* .btn-container button:first-child {
   background-color: rgb(221, 221, 9);
-}
-.btns-container button:last-child {
+} */
+.btn-container button:last-child {
   background-color: rgb(211, 16, 16);
   color: white;
 }
 @media screen and (max-width: 580px) {
   .user-image {
-    --size: 25px;
+    --size: 30px;
     font-size: 0.7rem;
   }
-  .user-name span {
-    font-size: 0.9rem;
-  }
-  .btns-container {
-    gap: 5px;
-  }
-  .btns-container button {
+  .btn-container button {
     padding: 0.3em;
   }
 }
-
+@media screen and (max-width: 680px) {
+  .user-name span {
+    font-size: 1rem;
+  }
+}
 .overlay {
   position: absolute;
   content: "";

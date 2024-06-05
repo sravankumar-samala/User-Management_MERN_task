@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Pencil } from "lucide-react";
 
 export default function UpdateUser() {
@@ -8,8 +8,8 @@ export default function UpdateUser() {
   const [errors, setErrors] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
-  const { currentPage } = location.state || { currentPage: 1 };
+  // const location = useLocation();
+  // const { currentPage } = location.state || { currentPage: 1 };
 
   const validateForm = () => {
     const { name, contact, dateOfBirth, description, email } = user;
@@ -43,7 +43,7 @@ export default function UpdateUser() {
       try {
         const response = await fetch(url, options);
         if (!response.ok) return;
-        navigate("/", { state: { currentPage } });
+        navigate(-1);
       } catch (error) {
         console.log(error.message);
       }
@@ -77,9 +77,9 @@ export default function UpdateUser() {
         <button
           className="add-user-btn"
           type="button"
-          onClick={() => navigate("/")}
+          onClick={() => navigate(-1)}
         >
-          &#11013; Home
+          &#11013; Back
         </button>
       </header>
       {userPending && <p>Loading...</p>}
