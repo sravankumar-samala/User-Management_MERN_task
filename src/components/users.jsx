@@ -29,7 +29,7 @@ export default function Users() {
     const limit = 10;
     try {
       setIsLoading(true);
-      const url = `http://localhost:3004/getAllUsers?page=${currentPage}&limit=${limit}`;
+      const url = `https://user-management-men.onrender.com/getAllUsers?page=${currentPage}&limit=${limit}`;
       const response = await fetch(url);
       if (!response.ok) return;
       const data = await response.json();
