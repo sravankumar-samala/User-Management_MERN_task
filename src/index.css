@@ -29,9 +29,11 @@ button {
   outline: none;
   font-size: 1rem;
 }
-h1,
-h2 {
+h1 {
   color: var(--clr-accent);
+}
+h2 span {
+  margin-right: 5px;
 }
 
 .app-container {
@@ -56,6 +58,8 @@ h1 {
 .header {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
   align-items: center;
   margin-bottom: 2.5em;
 }
@@ -63,5 +67,17 @@ h1 {
   padding: 0.5em 1em;
   border-radius: 6px;
   background-color: var(--clr-accent);
-  color: white;
+  color: var(--clr-primary);
+}
+form button {
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  background-color: #2e7fcf;
+  color: var(--clr-primary);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.btn-update {
+  background-color: #cccf2e;
+  color: var(--clr-accent);
 }

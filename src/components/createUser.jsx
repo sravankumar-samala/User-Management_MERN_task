@@ -49,8 +49,6 @@ export default function CreateUser() {
       try {
         const response = await fetch(url, options);
         if (!response.ok) return;
-        // const data = await response.json();
-        // console.log(data.message);
         goToHome();
       } catch (error) {
         console.log(error.message);
@@ -68,8 +66,9 @@ export default function CreateUser() {
           &#11013; Home
         </button>
       </header>
+
       <form onSubmit={onSubmitForm}>
-        <h2>Fill in User Details</h2>
+        <h2>&#10010; Fill in User Details</h2>
         <div className="inputs-devider">
           <label htmlFor="name">Name:</label>
           <input

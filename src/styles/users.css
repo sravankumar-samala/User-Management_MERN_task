@@ -104,10 +104,10 @@ tbody tr:hover {
   font-size: 1.1rem;
 }
 .confirm-delete-container button:first-child {
-  background-color: red;
+  background-color: #f02b21;
   color: white;
 }
 .confirm-delete-container button:last-child {
-  background-color: green;
+  background-color: #19bd27;
   color: white;
 }

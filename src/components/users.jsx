@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pencil, Trash2 } from "lucide-react";
+import { useMediaQuery } from "react-responsive";
 import ReactLoading from "react-loading";
 import "../styles/users.css";
 
@@ -10,6 +11,8 @@ export default function Users() {
   const [showConfirmBox, setShowConfirmBox] = useState(false);
   const [userId, setUserId] = useState("");
   const navigate = useNavigate();
+  const isScreenAbove620 = useMediaQuery({ query: "(min-width: 620px)" });
+  const isScreenAbove540 = useMediaQuery({ query: "(min-width: 540px)" });
 
   const goToAddNewUser = () => {
     navigate("/createUser");
@@ -23,7 +26,6 @@ export default function Users() {
       if (!response.ok) return;
       const data = await response.json();
       setUsers(data);
-      console.log(data);
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -66,8 +68,8 @@ export default function Users() {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Email</th>
-              <th>contact</th>
+              {isScreenAbove540 && <th>Email</th>}
+              {isScreenAbove620 && <th>contact</th>}
               <th></th>
             </tr>
           </thead>
@@ -81,8 +83,8 @@ export default function Users() {
                     </span>
                     <span className="user-name">{user.name}</span>
                   </td>
-                  <td>{user.email}</td>
-                  <td>{user.contact}</td>
+                  {isScreenAbove540 && <td>{user.email}</td>}
+                  {isScreenAbove620 && <td>{user.contact}</td>}
                   <td className="btns-container">
                     <button
                       type="button"
@@ -108,7 +110,7 @@ export default function Users() {
       {showConfirmBox && (
         <div className="overlay">
           <div className="confirm-delete-container">
-            <h3>Are you sure?</h3>
+            <h2>Are you sure?</h2>
             <div>
               <button type="button" onClick={() => setShowConfirmBox(false)}>
                 Cancel
