@@ -6,30 +6,26 @@ table {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.205);
 }
 th {
+  padding: 0.5em 1em;
+  color: var(--clr-primary);
+  background-color: var(--clr-accent);
   font-weight: bold;
   font-size: clamp(1.1rem, 1.3vw, 1.5rem);
   text-align: left;
   text-transform: capitalize;
   letter-spacing: 0.5px;
 }
-th {
-  padding: 0.5em 1em;
-}
 td {
-  padding: 0.7em;
+  padding: 0.5em;
 }
-thead th {
-  background-color: white;
-  border-bottom: 2px solid var(--clr-accent);
-}
+
 tbody tr {
   background-color: white;
   transition: all 0.1s ease-in;
 }
 
 tbody tr:hover {
-  background-color: var(--clr-accent);
-  color: white;
+  background-color: #eddfca;
 }
 .user-name-contaner {
   display: flex;
@@ -45,6 +41,15 @@ tbody tr:hover {
   border-radius: 50%;
   color: white;
   font-weight: bold;
+}
+
+.user-name {
+  display: grid;
+  font-size: 1.1rem;
+}
+.user-name i {
+  font-size: 0.7rem;
+  color: gray;
 }
 .btns-container {
   display: flex;
@@ -66,11 +71,20 @@ tbody tr:hover {
   background-color: rgb(211, 16, 16);
   color: white;
 }
-
-.loading-container {
-  display: grid;
-  place-items: center;
-  min-height: 200px;
+@media screen and (max-width: 580px) {
+  .user-image {
+    --size: 25px;
+    font-size: 0.7rem;
+  }
+  .user-name span {
+    font-size: 0.9rem;
+  }
+  .btns-container {
+    gap: 5px;
+  }
+  .btns-container button {
+    padding: 0.3em;
+  }
 }
 
 .overlay {

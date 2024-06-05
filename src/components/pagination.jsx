@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import "../styles/pagination.css";
 
 export default function Pagination({ currentPage, totalPages, changePage }) {
@@ -16,17 +17,17 @@ export default function Pagination({ currentPage, totalPages, changePage }) {
         onClick={goToPreviousPage}
         disabled={currentPage <= 1}
       >
-        Prev
+        <ChevronsLeft /> Prev
       </button>
-      <p>
-        {currentPage}/{totalPages}
-      </p>
+      <span>
+        <span className="current-page">{currentPage}</span> of {totalPages}
+      </span>
       <button
         type="button"
         onClick={goToNextPage}
         disabled={currentPage >= totalPages}
       >
-        Next
+        Next <ChevronsRight />
       </button>
     </div>
   );

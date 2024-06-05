@@ -1,40 +1,25 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Pencil, Trash2 } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
-import ReactLoading from "react-loading";
-import "../styles/users.css";
 import Pagination from "./pagination";
-
-const colorsList = [
-  "#430a5d",
-  "#240750",
-  "#6d3405",
-  "#791142",
-  "#116d6e",
-  "#735f32",
-  "#082a56",
-  "#1e5128",
-  "#065f36",
-  "#d89216",
-  "#323232",
-  "#690707",
-];
-const chooseRandomColor = () => {
-  const index = Math.floor(Math.random() * colorsList.length);
-  return colorsList[index];
-};
+import chooseRandomColor from "./getRandomFile";
+import "../styles/users.css";
+import LoadingView from "./LoadingView";
 
 export default function Users() {
+  const location = useLocation();
   const [users, setUsers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showConfirmBox, setShowConfirmBox] = useState(false);
   const [userId, setUserId] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(
+    location.state?.currentPage || 1
+  );
   const [totalPages, setTotalPages] = useState(1);
-  const navigate = useNavigate();
   const isScreenAbove620 = useMediaQuery({ query: "(min-width: 620px)" });
-  const isScreenAbove540 = useMediaQuery({ query: "(min-width: 540px)" });
+  const isScreenAbove580 = useMediaQuery({ query: "(min-width: 580px)" });
+  const navigate = useNavigate();
 
   const goToAddNewUser = () => {
     navigate("/createUser");
@@ -49,9 +34,8 @@ export default function Users() {
       if (!response.ok) return;
       const data = await response.json();
       setUsers(data.users);
-      setCurrentPage(data.currentPage);
+      setCurrentPage(Number(data.currentPage));
       setTotalPages(data.totalPages);
-      console.log(data);
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -59,23 +43,26 @@ export default function Users() {
     }
   }, [currentPage]);
 
-  const deleteUser = async (id) => {
-    const url = "https://user-management-men.onrender.com/deleteUser/" + id;
-    try {
-      const response = await fetch(url, { method: "DELETE" });
-      if (!response.ok) return;
-      const data = await response.json();
-      console.log(data.message);
-      setShowConfirmBox(false);
-      getUsers();
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  const deleteUser = useCallback(
+    async (id) => {
+      const url = "https://user-management-men.onrender.com/deleteUser/" + id;
+      try {
+        const response = await fetch(url, { method: "DELETE" });
+        if (!response.ok) return;
+        const data = await response.json();
+        console.log(data.message);
+        setShowConfirmBox(false);
+        getUsers();
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
+    [getUsers]
+  );
 
   useEffect(() => {
     getUsers();
-  }, [currentPage, getUsers]);
+  }, [getUsers]);
 
   return (
     <>
@@ -86,15 +73,13 @@ export default function Users() {
         </button>
       </header>
       {isLoading ? (
-        <div className="loading-container">
-          <ReactLoading color="#18292e" type="spin" width={50} height={50} />
-        </div>
+        <LoadingView />
       ) : (
         <table>
           <thead>
             <tr>
               <th>Name</th>
-              {isScreenAbove540 && <th>Email</th>}
+              {isScreenAbove580 && <th>Email</th>}
               {isScreenAbove620 && <th>contact</th>}
               <th></th>
             </tr>
@@ -106,18 +91,27 @@ export default function Users() {
                   <td className="user-name-contaner">
                     <span
                       className="user-image"
-                      style={{ backgroundColor: chooseRandomColor() }}
+                      style={{
+                        backgroundColor: chooseRandomColor(),
+                      }}
                     >
                       {user.name.slice(0, 1).toUpperCase()}
                     </span>
-                    <span className="user-name">{user.name}</span>
+                    <span className="user-name">
+                      <span>{user.name}</span>
+                      {!isScreenAbove580 && <i>{user.email}</i>}
+                    </span>
                   </td>
-                  {isScreenAbove540 && <td>{user.email}</td>}
+                  {isScreenAbove580 && <td>{user.email}</td>}
                   {isScreenAbove620 && <td>{user.contact}</td>}
                   <td className="btns-container">
                     <button
                       type="button"
-                      onClick={() => navigate(`/updateUser/${user._id}`)}
+                      onClick={() =>
+                        navigate(`/updateUser/${user._id}`, {
+                          state: { currentPage },
+                        })
+                      }
                     >
                       <Pencil size={16} />
                     </button>

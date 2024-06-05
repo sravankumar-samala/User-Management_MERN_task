@@ -1,32 +1,15 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Pencil } from "lucide-react";
 
 export default function UpdateUser() {
   const [user, setUser] = useState(null);
   const [userPending, setUesrPending] = useState(false);
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
   const { id } = useParams();
-
-  //   const onSubmitForm = async (e) => {
-  //     e.preventDefault();
-  //     const url = `https://user-management-men.onrender.com/updateUser/${id}`;
-  //     const options = {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(user),
-  //     };
-  //     try {
-  //       const response = await fetch(url, options);
-  //       if (!response.ok) return;
-  //       navigate("/");
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { currentPage } = location.state || { currentPage: 1 };
 
   const validateForm = () => {
     const { name, contact, dateOfBirth, description, email } = user;
@@ -60,7 +43,7 @@ export default function UpdateUser() {
       try {
         const response = await fetch(url, options);
         if (!response.ok) return;
-        navigate("/");
+        navigate("/", { state: { currentPage } });
       } catch (error) {
         console.log(error.message);
       }
