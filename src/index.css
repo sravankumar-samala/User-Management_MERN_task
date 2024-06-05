@@ -22,6 +22,21 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Ubuntu", sans-serif;
+  background: linear-gradient(
+    to right,
+    #430a5d,
+    #240750,
+    #6d3405,
+    #791142,
+    #116d6e,
+    #735f32,
+    #082a56,
+    #1e5128,
+    #065f36,
+    #d89216,
+    #323232,
+    #690707
+  );
 }
 button {
   cursor: pointer;

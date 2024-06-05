@@ -1,15 +1,37 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pencil, Trash2 } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import ReactLoading from "react-loading";
 import "../styles/users.css";
+import Pagination from "./pagination";
+
+const colorsList = [
+  "#430a5d",
+  "#240750",
+  "#6d3405",
+  "#791142",
+  "#116d6e",
+  "#735f32",
+  "#082a56",
+  "#1e5128",
+  "#065f36",
+  "#d89216",
+  "#323232",
+  "#690707",
+];
+const chooseRandomColor = () => {
+  const index = Math.floor(Math.random() * colorsList.length);
+  return colorsList[index];
+};
 
 export default function Users() {
   const [users, setUsers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showConfirmBox, setShowConfirmBox] = useState(false);
   const [userId, setUserId] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const navigate = useNavigate();
   const isScreenAbove620 = useMediaQuery({ query: "(min-width: 620px)" });
   const isScreenAbove540 = useMediaQuery({ query: "(min-width: 540px)" });
@@ -18,20 +40,24 @@ export default function Users() {
     navigate("/createUser");
   };
 
-  const getUsers = async () => {
+  const getUsers = useCallback(async () => {
+    const limit = 10;
     try {
       setIsLoading(true);
-      const url = "https://user-management-men.onrender.com/getAllUsers";
+      const url = `http://localhost:3004/getAllUsers?page=${currentPage}&limit=${limit}`;
       const response = await fetch(url);
       if (!response.ok) return;
       const data = await response.json();
-      setUsers(data);
+      setUsers(data.users);
+      setCurrentPage(data.currentPage);
+      setTotalPages(data.totalPages);
+      console.log(data);
     } catch (error) {
       console.log(error.message);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [currentPage]);
 
   const deleteUser = async (id) => {
     const url = "https://user-management-men.onrender.com/deleteUser/" + id;
@@ -49,7 +75,7 @@ export default function Users() {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [currentPage, getUsers]);
 
   return (
     <>
@@ -78,7 +104,10 @@ export default function Users() {
               users?.map((user) => (
                 <tr key={user._id}>
                   <td className="user-name-contaner">
-                    <span className="user-image">
+                    <span
+                      className="user-image"
+                      style={{ backgroundColor: chooseRandomColor() }}
+                    >
                       {user.name.slice(0, 1).toUpperCase()}
                     </span>
                     <span className="user-name">{user.name}</span>
@@ -107,6 +136,11 @@ export default function Users() {
           </tbody>
         </table>
       )}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        changePage={setCurrentPage}
+      />
       {showConfirmBox && (
         <div className="overlay">
           <div className="confirm-delete-container">
