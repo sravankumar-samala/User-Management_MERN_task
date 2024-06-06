@@ -42,6 +42,11 @@ h2 span {
   padding: 2em 0.7em;
   position: relative;
 }
+@media screen and (max-width: 570px) {
+  .app-container {
+    padding-inline: 0;
+  }
+}
 .main-container {
   background-color: var(--clr-primary);
   min-height: 90vh;
@@ -78,7 +83,7 @@ form button {
   font-size: 1.1rem;
 }
 .btn-update {
-  background-color: #cccf2e;
+  background-color: #dbdf13;
   color: var(--clr-accent);
 }
 .loading-container {
