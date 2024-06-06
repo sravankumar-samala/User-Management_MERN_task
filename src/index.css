@@ -55,6 +55,7 @@ h2 span {
   border-radius: 10px;
   padding: 1em;
   padding-top: 2em;
+  display: grid;
 }
 
 h1 {
@@ -90,4 +91,19 @@ form button {
   display: grid;
   place-items: center;
   min-height: 200px;
+}
+
+.not-found-container {
+  min-height: 100%;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  gap: 1em;
+}
+.not-found-container button {
+  background-color: var(--clr-accent);
+  color: var(--clr-primary);
+  border-radius: 5px;
+  padding: 0.5em;
+  margin-top: 1em;
 }
