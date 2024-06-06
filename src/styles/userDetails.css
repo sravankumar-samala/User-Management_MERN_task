@@ -1,4 +1,70 @@
+.user-details-container {
+  --clr-shadow: rgba(0, 0, 0, 0.226);
+  --clr-secondary-txt: #bfbfb2;
+
+  display: grid;
+  /* grid-template-areas:
+    "profilePic name updateButton"
+    "profilePic email email"
+    "profilePic contact contact"
+    "profilePic description description"; */
+  /* align-items: start;
+  justify-items: start;
+  gap: 1em; */
+  background-color: var(--clr-accent);
+  padding: 5em 1em 2em;
+  border-radius: 10px;
+  color: var(--clr-primary);
+  position: relative;
+  min-height: 200px;
+  width: min(500px, 100%);
+  margin: 5em auto 0;
+}
+
+.image-container {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: -2px 0px 10px var(--clr-shadow), 2px 0 10px var(--clr-shadow);
+}
+@media screen and (max-width: 520px) {
+  .image-container {
+    top: -50px;
+    width: 100px;
+  }
+}
+.image-container img {
+  max-width: 100%;
+}
+.details-wrapper {
+  display: grid;
+  gap: 1.5em;
+  text-align: center;
+}
+.name {
+  font-size: clamp(1.7rem, 2.3vw, 2.7rem);
+}
+.email,
+.description p {
+  color: var(--clr-secondary-txt);
+}
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+}
 .update-btn {
   background-color: rgb(221, 221, 9);
-  padding: 0.5em 1em;
+  padding: 0.3em 0.5em;
+  border-radius: 5px;
+  position: absolute;
+  top: 1em;
+  right: 1em;
 }

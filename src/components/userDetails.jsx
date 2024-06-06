@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { Pencil } from "lucide-react";
 import LoadingView from "./LoadingView";
 import "../styles/userDetails.css";
 
@@ -41,17 +42,33 @@ export default function UserDetails() {
         </button>
       </header>
       {isUserPending && <LoadingView />}
-      {userDetails && (
-        <>
-          <h2>{userDetails.name}</h2>
+      {!isUserPending && userDetails && (
+        <div className="user-details-container">
+          <div className="image-container">
+            <img src="/userProfile.png" alt="profile picture" />
+          </div>
           <button
             type="button"
             className="update-btn"
             onClick={() => navigate(`/updateUser/${userDetails._id}`)}
           >
-            Update
+            <Pencil size={16} />
           </button>
-        </>
+          <div className="details-wrapper">
+            <div className="user-name-container">
+              <h2 className="name">{userDetails.name}</h2>
+              <p className="email">{userDetails.email}</p>
+            </div>
+            <div className="contact">
+              <h3>Contact:</h3>
+              <p>{userDetails.contact}</p>
+            </div>
+            <div className="description">
+              <h3>Description:</h3>
+              <p>{userDetails.description}</p>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

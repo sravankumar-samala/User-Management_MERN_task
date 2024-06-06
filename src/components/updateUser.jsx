@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Pencil } from "lucide-react";
+import LoadingView from "./LoadingView";
 
 export default function UpdateUser() {
   const [user, setUser] = useState(null);
@@ -82,8 +83,8 @@ export default function UpdateUser() {
           &#11013; Back
         </button>
       </header>
-      {userPending && <p>Loading...</p>}
-      {user && (
+      {userPending && <LoadingView />}
+      {!userPending && user && (
         <form onSubmit={onSubmitForm}>
           <h2>
             <span>
