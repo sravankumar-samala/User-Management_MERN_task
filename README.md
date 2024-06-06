@@ -88,7 +88,7 @@ The User Management Dashboard is a web application that allows users to manage a
 
 Fetches a paginated list of users.
 
-- \*\*Query Parameters:
+- **Query Parameters**:
   - `page`: The page number to fetch.
   - `limit`: The number of users per page.
 
