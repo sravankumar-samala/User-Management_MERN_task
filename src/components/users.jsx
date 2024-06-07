@@ -4,8 +4,8 @@ import { Trash2 } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import Pagination from "./pagination";
 import chooseRandomColor from "./getRandomFile";
-import "../styles/users.css";
 import LoadingView from "./LoadingView";
+import "../styles/users.css";
 
 export default function Users() {
   const location = useLocation();
@@ -75,75 +75,67 @@ export default function Users() {
       {isLoading ? (
         <LoadingView />
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              {isScreenAbove680 && <th>Email</th>}
-              {isScreenAbove460 && <th>date of birth</th>}
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {users &&
-              users?.map((user) => (
-                <tr
-                  key={user._id}
-                  onClick={() =>
-                    navigate(`/userDetails/${user._id}`, {
-                      state: { currentPage },
-                    })
-                  }
-                >
-                  <td className="user-name-contaner">
-                    <span
-                      className="user-image"
-                      style={{
-                        backgroundColor: chooseRandomColor(),
-                      }}
-                    >
-                      {user.name.slice(0, 1).toUpperCase()}
-                    </span>
-                    <span className="user-name">
-                      <span>{user.name}</span>
-                      {!isScreenAbove680 && <i>{user.email}</i>}
-                    </span>
-                  </td>
-                  {isScreenAbove680 && <td>{user.email}</td>}
-                  {isScreenAbove460 && <td>{user.dateOfBirth}</td>}
-                  <td className="btn-container">
-                    {/* <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(`/updateUser/${user._id}`, {
-                          state: { currentPage },
-                        });
-                      }}
-                    >
-                      <Pencil size={16} />
-                    </button> */}
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setShowConfirmBox(true);
-                        setUserId(user._id);
-                      }}
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        <>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                {isScreenAbove680 && <th>Email</th>}
+                {isScreenAbove460 && <th>date of birth</th>}
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {users &&
+                users?.map((user) => (
+                  <tr
+                    key={user._id}
+                    onClick={() =>
+                      navigate(`/userDetails/${user._id}`, {
+                        state: { currentPage },
+                      })
+                    }
+                  >
+                    <td className="user-name-contaner">
+                      <span
+                        className="user-image"
+                        style={{
+                          backgroundColor: chooseRandomColor(),
+                        }}
+                      >
+                        {user.name.slice(0, 1).toUpperCase()}
+                      </span>
+                      <span className="user-name">
+                        <span>{user.name}</span>
+                        {!isScreenAbove680 && <i>{user.email}</i>}
+                      </span>
+                    </td>
+                    {isScreenAbove680 && <td>{user.email}</td>}
+                    {isScreenAbove460 && <td>{user.dateOfBirth}</td>}
+                    <td className="btn-container">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowConfirmBox(true);
+                          setUserId(user._id);
+                        }}
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            changePage={setCurrentPage}
+          />
+        </>
       )}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        changePage={setCurrentPage}
-      />
+
       {showConfirmBox && (
         <div className="overlay">
           <div className="confirm-delete-container">
