@@ -56,6 +56,8 @@ h2 span {
   padding: 1em;
   padding-top: 2em;
   display: grid;
+  align-items: start;
+  grid-template-rows: auto 1fr auto;
 }
 
 h1 {
