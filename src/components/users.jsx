@@ -22,7 +22,7 @@ export default function Users() {
   const navigate = useNavigate();
 
   const goToAddNewUser = () => {
-    navigate("/createUser");
+    navigate("/createUser", { state: { currentPage } });
   };
 
   const getUsers = useCallback(async () => {
@@ -103,7 +103,7 @@ export default function Users() {
                           backgroundColor: chooseRandomColor(),
                         }}
                       >
-                        {user.name.slice(0, 1).toUpperCase()}
+                        {user.name.slice(0, 1)}
                       </span>
                       <span className="user-name">
                         <span>{user.name}</span>
@@ -139,7 +139,7 @@ export default function Users() {
       {showConfirmBox && (
         <div className="overlay">
           <div className="confirm-delete-container">
-            <h2>Are you sure?</h2>
+            <h2>Delete user?</h2>
             <div>
               <button type="button" onClick={() => setShowConfirmBox(false)}>
                 Cancel

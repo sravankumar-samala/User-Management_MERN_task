@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/createUser.css";
 
 export default function CreateUser() {
@@ -10,8 +10,10 @@ export default function CreateUser() {
   const [description, setDescription] = useState("");
   const [errors, setErros] = useState({});
   const navigate = useNavigate();
+  const location = useLocation();
+  const { currentPage } = location.state || { currentPage: 1 };
 
-  const goToHome = () => navigate("/");
+  const goToHome = () => navigate("/", { state: { currentPage } });
 
   const validateForm = () => {
     const newErrors = {};
@@ -30,8 +32,12 @@ export default function CreateUser() {
     e.preventDefault();
     const newErrors = validateForm();
     if (Object.keys(newErrors).length === 0) {
+      const capitalizedName = name
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
       const user = {
-        name,
+        name: capitalizedName,
         email,
         contact: Number(contact),
         dateOfBirth,
